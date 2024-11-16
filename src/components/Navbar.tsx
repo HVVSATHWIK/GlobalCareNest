@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Heart, Brain, Apple, Dumbbell, BookOpen, Siren, FolderHeart, Activity } from 'lucide-react';
+import { Menu, X, Heart, Brain, Apple, Dumbbell, BookOpen, Siren, FolderHeart, Activity, LogIn, UserPlus } from 'lucide-react';
+import { useAuthStore } from '../store/authStore';
 
-const Navbar = () => {
+interface NavbarProps {
+  onAuth: (type: 'signin' | 'signup') => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onAuth }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const user = useAuthStore((state) => state.user);
+  const setUser = useAuthStore((state) => state.setUser);
 
   const navItems = [
     { name: 'Mental Health', path: '/mental-health', icon: Brain },
@@ -15,6 +22,10 @@ const Navbar = () => {
     { name: 'SOS Support', path: '/sos', icon: Siren },
     { name: 'Medical Portfolio', path: '/portfolio', icon: FolderHeart },
   ];
+
+  const handleLogout = () => {
+    setUser(null);
+  };
 
   return (
     <nav className="bg-[#219B9D] text-white shadow-lg">
@@ -39,6 +50,37 @@ const Navbar = () => {
                 <span>{item.name}</span>
               </Link>
             ))}
+
+            <div className="border-l border-[#B9E5E8] pl-4 ml-4">
+              {user ? (
+                <div className="flex items-center space-x-4">
+                  <span className="text-sm">{user.name}</span>
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium bg-[#B9E5E8] text-[#219B9D] hover:bg-opacity-90 transition-colors"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => onAuth('signin')}
+                    className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium hover:bg-[#B9E5E8] hover:text-[#219B9D] transition-colors"
+                  >
+                    <LogIn className="h-4 w-4" />
+                    <span>Sign In</span>
+                  </button>
+                  <button
+                    onClick={() => onAuth('signup')}
+                    className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium bg-[#B9E5E8] text-[#219B9D] hover:bg-opacity-90 transition-colors"
+                  >
+                    <UserPlus className="h-4 w-4" />
+                    <span>Sign Up</span>
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Mobile menu button */}
@@ -69,6 +111,46 @@ const Navbar = () => {
                 <span>{item.name}</span>
               </Link>
             ))}
+
+            {user ? (
+              <div className="border-t border-[#B9E5E8] pt-2 mt-2">
+                <div className="px-3 py-2">
+                  <span className="block text-sm mb-2">{user.name}</span>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setIsOpen(false);
+                    }}
+                    className="flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium bg-[#B9E5E8] text-[#219B9D] hover:bg-opacity-90 transition-colors w-full"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="border-t border-[#B9E5E8] pt-2 mt-2">
+                <button
+                  onClick={() => {
+                    onAuth('signin');
+                    setIsOpen(false);
+                  }}
+                  className="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium hover:bg-[#B9E5E8] hover:text-[#219B9D] transition-colors w-full"
+                >
+                  <LogIn className="h-5 w-5" />
+                  <span>Sign In</span>
+                </button>
+                <button
+                  onClick={() => {
+                    onAuth('signup');
+                    setIsOpen(false);
+                  }}
+                  className="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium bg-[#B9E5E8] text-[#219B9D] hover:bg-opacity-90 transition-colors w-full mt-2"
+                >
+                  <UserPlus className="h-5 w-5" />
+                  <span>Sign Up</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
