@@ -10,11 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@google-cloud/storage": "^7.14.0",
-    "@google-cloud/vertexai": "^1.9.2",
     "@headlessui/react": "^1.7.18",
-    "dotenv": "^16.4.7",
-    "firebase": "^10.14.1",
+    "firebase": "^10.8.0",
     "lucide-react": "^0.344.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
