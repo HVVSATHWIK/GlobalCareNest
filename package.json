@@ -10,15 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@google-cloud/storage": "^7.14.0",
     "@google-cloud/vertexai": "^1.9.2",
     "@headlessui/react": "^1.7.18",
     "dotenv": "^16.4.7",
     "firebase": "^10.14.1",
-=======
-    "@headlessui/react": "^1.7.18",
->>>>>>> 6571257e407549ebbfc7d359a6c37fe2b741ae70
     "lucide-react": "^0.344.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -38,8 +34,4 @@
     "typescript": "^5.3.3",
     "vite": "^5.1.0"
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 6571257e407549ebbfc7d359a6c37fe2b741ae70
