@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Heart, Brain, Apple, Dumbbell, BookOpen, Siren, FolderHeart, Activity, LogIn, UserPlus } from 'lucide-react';
+<<<<<<< HEAD
+import { useAuthContext } from '../contexts/AuthContext';
+import { signOut } from '../services/auth';
+import ThemeToggle from './ThemeToggle';
+import { NavLinks } from './navigation/NavLinks';
+import { MobileMenu } from './navigation/MobileMenu';
+import { AuthButtons } from './navigation/AuthButtons';
+=======
 import { useAuthStore } from '../store/authStore';
+>>>>>>> 6571257e407549ebbfc7d359a6c37fe2b741ae70
 
 interface NavbarProps {
   onAuth: (type: 'signin' | 'signup') => void;
@@ -9,6 +18,9 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ onAuth }) => {
   const [isOpen, setIsOpen] = useState(false);
+<<<<<<< HEAD
+  const { user } = useAuthContext();
+=======
   const user = useAuthStore((state) => state.user);
   const setUser = useAuthStore((state) => state.setUser);
 
@@ -26,6 +38,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAuth }) => {
   const handleLogout = () => {
     setUser(null);
   };
+>>>>>>> 6571257e407549ebbfc7d359a6c37fe2b741ae70
 
   return (
     <nav className="bg-[#219B9D] text-white shadow-lg">
@@ -40,6 +53,12 @@ const Navbar: React.FC<NavbarProps> = ({ onAuth }) => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
+<<<<<<< HEAD
+            <NavLinks />
+            <div className="flex items-center space-x-4 ml-4">
+              <ThemeToggle />
+              <AuthButtons user={user} onAuth={onAuth} onSignOut={signOut} />
+=======
             {navItems.map((item) => (
               <Link
                 key={item.path}
@@ -80,15 +99,24 @@ const Navbar: React.FC<NavbarProps> = ({ onAuth }) => {
                   </button>
                 </div>
               )}
+>>>>>>> 6571257e407549ebbfc7d359a6c37fe2b741ae70
             </div>
           </div>
 
           {/* Mobile menu button */}
+<<<<<<< HEAD
+          <div className="md:hidden flex items-center space-x-4">
+            <ThemeToggle />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md hover:bg-[#B9E5E8] hover:text-[#219B9D] transition-colors"
+=======
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md hover:bg-[#B9E5E8] hover:text-[#219B9D] transition-colors"
               aria-expanded="false"
+>>>>>>> 6571257e407549ebbfc7d359a6c37fe2b741ae70
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -97,6 +125,15 @@ const Navbar: React.FC<NavbarProps> = ({ onAuth }) => {
       </div>
 
       {/* Mobile Navigation */}
+<<<<<<< HEAD
+      <MobileMenu 
+        isOpen={isOpen} 
+        onClose={() => setIsOpen(false)}
+        user={user}
+        onAuth={onAuth}
+        onSignOut={signOut}
+      />
+=======
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1">
@@ -154,6 +191,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAuth }) => {
           </div>
         </div>
       )}
+>>>>>>> 6571257e407549ebbfc7d359a6c37fe2b741ae70
     </nav>
   );
 };

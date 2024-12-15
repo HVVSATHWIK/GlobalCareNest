@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+import React from 'react';
+import { Brain, Heart, Sparkles } from 'lucide-react';
+import PageHeader from '../components/common/PageHeader';
+import ContentCard from '../components/common/ContentCard';
+import MoodTracker from '../components/MoodTracker';
+
+const MentalHealth = () => {
+=======
 import React, { useState } from 'react';
 import { Brain, Heart, Sparkles } from 'lucide-react';
 import ResourceCard from '../components/ResourceCard';
@@ -7,6 +16,7 @@ import MoodTracker from '../components/MoodTracker';
 const MentalHealth: React.FC = () => {
   const [showExerciseModal, setShowExerciseModal] = useState(false);
 
+>>>>>>> 6571257e407549ebbfc7d359a6c37fe2b741ae70
   const resources = [
     {
       title: "Mindfulness Meditation",
@@ -28,6 +38,27 @@ const MentalHealth: React.FC = () => {
     }
   ];
 
+<<<<<<< HEAD
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <PageHeader
+        icon={Brain}
+        title="Mental Health Support"
+        description="Your mental well-being matters. Explore our resources, exercises, and tools designed to support your journey."
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
+            <h2 className="text-2xl font-bold mb-6">Resources & Guides</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {resources.map((resource, index) => (
+                <ContentCard key={index} {...resource} />
+              ))}
+            </div>
+          </div>
+
+=======
   const exercises = [
     {
       title: "5-Minute Breathing Exercise",
@@ -118,6 +149,7 @@ const MentalHealth: React.FC = () => {
           </div>
 
           {/* Sidebar */}
+>>>>>>> 6571257e407549ebbfc7d359a6c37fe2b741ae70
           <div className="space-y-6">
             <MoodTracker />
             
