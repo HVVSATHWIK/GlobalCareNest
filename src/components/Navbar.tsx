@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Heart, Brain, Apple, Dumbbell, BookOpen, Siren, FolderHeart, Activity } from 'lucide-react';
+import AuthButtons from './Auth/AuthButtons';
+import { useThemeStore } from '../store/themeStore';
+import ThemeToggle from './ThemeToggle';
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface NavbarProps {
+  onAuth: (type: 'signin' | 'signup') => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onAuth }) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const isDarkMode = useThemeStore((state) => state.isDarkMode);
 
   const navItems = [
     { name: 'Mental Health', path: '/mental-health', icon: Brain },
@@ -17,7 +25,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-[#219B9D] text-white shadow-lg">
+    <nav className={`bg-[#219B9D] text-white shadow-lg ${isDarkMode ? 'dark' : ''}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
@@ -39,14 +47,25 @@ const Navbar = () => {
                 <span>{item.name}</span>
               </Link>
             ))}
+            <div className="flex items-center space-x-4 ml-4">
+              <ThemeToggle />
+              <AuthButtons
+                onSignIn={() => onAuth('signin')}
+                onSignUp={() => onAuth('signup')}
+              />
+            </div>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
+          <div className="md:hidden flex items-center space-x-4">
+            <ThemeToggle />
+            <AuthButtons
+              onSignIn={() => onAuth('signin')}
+              onSignUp={() => onAuth('signup')}
+            />
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md hover:bg-[#B9E5E8] hover:text-[#219B9D] transition-colors"
-              aria-expanded="false"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
