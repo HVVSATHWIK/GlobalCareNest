@@ -1,23 +1,16 @@
-import { TextToSpeechClient } from '@google-cloud/text-to-speech';
-
-const client = new TextToSpeechClient();
-
 export const synthesizeSpeech = async (
   text: string,
   languageCode = 'en-US',
   voiceName = 'en-US-Neural2-A'
 ) => {
-  try {
-    const request = {
-      input: { text },
-      voice: { languageCode, name: voiceName },
-      audioConfig: { audioEncoding: 'MP3' },
-    };
+  console.warn(
+    '[textToSpeech] Google Cloud Text-to-Speech SDK cannot run in the browser. ' +
+      'Implement this via a backend endpoint (recommended) or swap to a browser TTS API.'
+  );
 
-    const [response] = await client.synthesizeSpeech(request);
-    return response.audioContent;
-  } catch (error) {
-    console.error('Error in text-to-speech:', error);
-    throw error;
-  }
+  void text;
+  void languageCode;
+  void voiceName;
+
+  throw new Error('Text-to-speech is not available in the client build.');
 };

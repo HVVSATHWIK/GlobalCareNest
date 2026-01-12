@@ -1,12 +1,13 @@
-import React, { createContext, useContext, ReactNode } from 'react';
+import React, { createContext, ReactNode } from 'react';
 import { useAuth } from '../hooks/useAuth';
+import type { User as FirebaseUser } from 'firebase/auth';
 
-interface AuthContextType {
-  user: any;
+export interface AuthContextType {
+  user: FirebaseUser | null;
   loading: boolean;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const auth = useAuth();
@@ -16,12 +17,4 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       {!auth.loading && children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuthContext = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuthContext must be used within an AuthProvider');
-  }
-  return context;
 };

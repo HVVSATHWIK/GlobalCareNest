@@ -1,33 +1,27 @@
-import { Storage } from '@google-cloud/storage';
+import { getDownloadURL, ref, uploadBytes, type UploadMetadata } from 'firebase/storage';
+import { storage } from '../../config/firebase';
 
-const storage = new Storage();
-const bucketName = process.env.VITE_GCP_STORAGE_BUCKET;
+type UploadFileMetadata = Record<string, string>;
 
 export const uploadFile = async (
-  file: Buffer,
+  file: Blob | Uint8Array | ArrayBuffer,
   destination: string,
-  metadata: Record<string, string> = {}
-) => {
+  metadata: UploadFileMetadata = {}
+): Promise<string> => {
   try {
-    const bucket = storage.bucket(bucketName);
-    const blob = bucket.file(destination);
-    
-    const blobStream = blob.createWriteStream({
-      metadata: {
-        contentType: metadata.contentType,
-        ...metadata,
-      },
-    });
+    const storageRef = ref(storage, destination);
 
-    return new Promise((resolve, reject) => {
-      blobStream.on('error', (error) => reject(error));
-      blobStream.on('finish', () => {
-        resolve(`gs://${bucketName}/${destination}`);
-      });
-      blobStream.end(file);
-    });
+    const { contentType, ...customMetadata } = metadata;
+    const uploadMetadata: UploadMetadata = {};
+    if (contentType) uploadMetadata.contentType = contentType;
+    if (Object.keys(customMetadata).length > 0) {
+      uploadMetadata.customMetadata = customMetadata;
+    }
+
+    await uploadBytes(storageRef, file, uploadMetadata);
+    return await getDownloadURL(storageRef);
   } catch (error) {
-    console.error('Error uploading to Cloud Storage:', error);
+    console.error('Error uploading to Firebase Storage:', error);
     throw error;
   }
 };

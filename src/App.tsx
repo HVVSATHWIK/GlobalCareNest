@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useAuthContext } from './contexts/AuthContext';
+import { useAuthContext } from './contexts/useAuthContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { ResponsiveContainer } from './components/layout/ResponsiveContainer';
@@ -13,6 +13,8 @@ import Articles from './pages/Articles';
 import Donation from './pages/Donation';
 import SOSSupport from './pages/SOSSupport';
 import MedicalPortfolio from './pages/MedicalPortfolio';
+import VideoConsultation from './pages/VideoConsultation';
+import LandingPage from './pages/LandingPage';
 import SignInModal from './components/Auth/SignInModal';
 import SignUpModal from './components/Auth/SignUpModal';
 import { useThemeStore } from './store/themeStore';
@@ -20,8 +22,15 @@ import { useThemeStore } from './store/themeStore';
 function App() {
   const [showSignIn, setShowSignIn] = React.useState(false);
   const [showSignUp, setShowSignUp] = React.useState(false);
-  const { user } = useAuthContext();
+  const { user, loading } = useAuthContext();
   const isDarkMode = useThemeStore((state) => state.isDarkMode);
+
+  React.useEffect(() => {
+    if (user) {
+      setShowSignIn(false);
+      setShowSignUp(false);
+    }
+  }, [user]);
 
   React.useEffect(() => {
     if (isDarkMode) {
@@ -41,6 +50,21 @@ function App() {
     }
   };
 
+  if (loading) {
+    return <div className="min-h-screen bg-gray-900 flex items-center justify-center"><div className="animate-spin rounded-full h-8 w-8 border-t-2 border-teal-500"></div></div>;
+  }
+
+  // Strict Auth Gating: Show Landing Page if not logged in
+  if (!user) {
+    return (
+      <div className={isDarkMode ? 'dark' : ''}>
+        <LandingPage onAuth={handleAuthModal} />
+        <SignInModal isOpen={showSignIn} onClose={() => setShowSignIn(false)} onSwitchToSignUp={() => handleAuthModal('signup')} />
+        <SignUpModal isOpen={showSignUp} onClose={() => setShowSignUp(false)} onSwitchToSignIn={() => handleAuthModal('signin')} />
+      </div>
+    );
+  }
+
   return (
     <div className={`min-h-screen flex flex-col ${isDarkMode ? 'dark' : ''}`}>
       <Navbar onAuth={handleAuthModal} />
@@ -55,15 +79,8 @@ function App() {
             <Route path="/articles" element={<Articles />} />
             <Route path="/donation" element={<Donation />} />
             <Route path="/sos" element={<SOSSupport />} />
-            <Route 
-              path="/portfolio" 
-              element={
-                <MedicalPortfolio 
-                  userId={user?.uid} 
-                  userEmail={user?.email} 
-                />
-              } 
-            />
+            <Route path="/consultation" element={<VideoConsultation />} />
+            <Route path="/portfolio" element={<MedicalPortfolio />} />
           </Routes>
         </ResponsiveContainer>
       </main>

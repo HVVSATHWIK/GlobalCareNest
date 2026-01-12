@@ -34,8 +34,9 @@ const SignInModal: React.FC<SignInModalProps> = ({ isOpen, onClose, onSwitchToSi
     try {
       await signIn(email, password);
       onClose();
-    } catch (err: any) {
-      setError(err.message || 'Failed to sign in');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to sign in';
+      setError(message);
     } finally {
       setLoading(false);
     }
@@ -47,8 +48,9 @@ const SignInModal: React.FC<SignInModalProps> = ({ isOpen, onClose, onSwitchToSi
     try {
       await signInWithGoogle();
       onClose();
-    } catch (err: any) {
-      setError(err.message || 'Failed to sign in with Google');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to sign in with Google';
+      setError(message);
     } finally {
       setLoading(false);
     }

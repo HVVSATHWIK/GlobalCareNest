@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { User } from 'firebase/auth';
-import { navItems } from './NavLinks';
+import { navItems } from './navItems';
 
 interface MobileMenuProps {
   isOpen: boolean;

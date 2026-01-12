@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FolderHeart, Upload, Save, Plus } from 'lucide-react';
-import { useAuthStore } from '../store/authStore';
+import { useAuthContext } from '../contexts/useAuthContext';
 
 interface MedicalRecord {
   id: string;
@@ -11,7 +11,7 @@ interface MedicalRecord {
 }
 
 const MedicalPortfolio = () => {
-  const user = useAuthStore((state) => state.user);
+  const { user } = useAuthContext();
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [records, setRecords] = useState<MedicalRecord[]>([]);
   const [personalInfo, setPersonalInfo] = useState({
@@ -47,13 +47,14 @@ const MedicalPortfolio = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <section className="bg-[#219B9D] text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center text-center">
-            <FolderHeart className="h-16 w-16 mb-6" />
-            <h1 className="text-4xl font-bold mb-4">Medical Portfolio</h1>
-            <p className="text-xl max-w-2xl">
-              Manage your complete medical history in one secure place
+      <section className="relative overflow-hidden bg-gradient-to-r from-[#1a2980] to-[#26d0ce] text-white py-16">
+        <div className="absolute inset-0 bg-white/10 backdrop-blur-[2px]"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center text-center animate-fade-in-up">
+            <FolderHeart className="h-16 w-16 mb-6 animate-bounce-slow" />
+            <h1 className="text-5xl font-extrabold mb-4 tracking-tight drop-shadow-lg">Medical Portfolio</h1>
+            <p className="text-xl max-w-3xl font-light opacity-90">
+              Your centralized health hub. Secure, accessible, and comprehensive.
             </p>
           </div>
         </div>
@@ -88,8 +89,10 @@ const MedicalPortfolio = () => {
               </label>
             </div>
             <div>
-              <h2 className="text-2xl font-semibold dark:text-white">{user?.name}</h2>
-              <p className="text-gray-600 dark:text-gray-300">{user?.email}</p>
+              <h2 className="text-2xl font-semibold dark:text-white">
+                {user?.displayName ?? user?.email?.split('@')[0] ?? 'User'}
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300">{user?.email ?? ''}</p>
             </div>
           </div>
 

@@ -1,48 +1,30 @@
-import { PubSub } from '@google-cloud/pubsub';
-
-const pubsub = new PubSub();
-
 export const publishMessage = async (
   topicName: string,
-  data: any,
+  data: unknown,
   attributes: Record<string, string> = {}
 ) => {
-  try {
-    const topic = pubsub.topic(topicName);
-    const messageBuffer = Buffer.from(JSON.stringify(data));
-    
-    const messageId = await topic.publish(messageBuffer, attributes);
-    console.log(`Message ${messageId} published.`);
-    return messageId;
-  } catch (error) {
-    console.error('Error publishing message:', error);
-    throw error;
-  }
+  console.warn(
+    '[messagingService] Google Cloud Pub/Sub client cannot run in the browser. ' +
+      'Implement publish/subscribe via a backend or swap to a client-ready service.'
+  );
+  void topicName;
+  void data;
+  void attributes;
+
+  const messageId =
+    typeof crypto !== 'undefined' && 'randomUUID' in crypto
+      ? crypto.randomUUID()
+      : `client-msg-${Date.now()}`;
+  return messageId;
 };
 
 export const subscribeToTopic = async (
   subscriptionName: string,
-  callback: (message: any) => Promise<void>
+  callback: (message: unknown) => Promise<void>
 ) => {
-  try {
-    const subscription = pubsub.subscription(subscriptionName);
-
-    subscription.on('message', async (message) => {
-      try {
-        const data = JSON.parse(message.data.toString());
-        await callback(data);
-        message.ack();
-      } catch (error) {
-        console.error('Error processing message:', error);
-        message.nack();
-      }
-    });
-
-    subscription.on('error', (error) => {
-      console.error('Subscription error:', error);
-    });
-  } catch (error) {
-    console.error('Error setting up subscription:', error);
-    throw error;
-  }
+  console.warn(
+    '[messagingService] Subscriptions are not available in the client build. No messages will be received.'
+  );
+  void subscriptionName;
+  void callback;
 };

@@ -3,11 +3,7 @@ import {
   doc, 
   setDoc, 
   getDoc, 
-  updateDoc,
-  collection,
-  query,
-  where,
-  getDocs
+  updateDoc
 } from 'firebase/firestore';
 
 export interface UserProfile {
@@ -25,28 +21,16 @@ export interface UserProfile {
 }
 
 export const createUserProfile = async (userData: UserProfile) => {
-  try {
-    await setDoc(doc(db, 'users', userData.id), userData);
-  } catch (error) {
-    throw error;
-  }
+  await setDoc(doc(db, 'users', userData.id), userData);
 };
 
 export const getUserProfile = async (userId: string) => {
-  try {
-    const docRef = doc(db, 'users', userId);
-    const docSnap = await getDoc(docRef);
-    return docSnap.exists() ? docSnap.data() as UserProfile : null;
-  } catch (error) {
-    throw error;
-  }
+  const docRef = doc(db, 'users', userId);
+  const docSnap = await getDoc(docRef);
+  return docSnap.exists() ? docSnap.data() as UserProfile : null;
 };
 
 export const updateUserProfile = async (userId: string, data: Partial<UserProfile>) => {
-  try {
-    const userRef = doc(db, 'users', userId);
-    await updateDoc(userRef, data);
-  } catch (error) {
-    throw error;
-  }
+  const userRef = doc(db, 'users', userId);
+  await updateDoc(userRef, data);
 };

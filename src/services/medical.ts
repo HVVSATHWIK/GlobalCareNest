@@ -25,40 +25,24 @@ export interface MedicalRecord {
 }
 
 export const addMedicalRecord = async (record: MedicalRecord) => {
-  try {
-    const docRef = await addDoc(collection(db, 'medicalRecords'), record);
-    return docRef.id;
-  } catch (error) {
-    throw error;
-  }
+  const docRef = await addDoc(collection(db, 'medicalRecords'), record);
+  return docRef.id;
 };
 
 export const getUserMedicalRecords = async (userId: string) => {
-  try {
-    const q = query(collection(db, 'medicalRecords'), where('userId', '==', userId));
-    const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    })) as MedicalRecord[];
-  } catch (error) {
-    throw error;
-  }
+  const q = query(collection(db, 'medicalRecords'), where('userId', '==', userId));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  })) as MedicalRecord[];
 };
 
 export const updateMedicalRecord = async (recordId: string, data: Partial<MedicalRecord>) => {
-  try {
-    const recordRef = doc(db, 'medicalRecords', recordId);
-    await updateDoc(recordRef, data);
-  } catch (error) {
-    throw error;
-  }
+  const recordRef = doc(db, 'medicalRecords', recordId);
+  await updateDoc(recordRef, data);
 };
 
 export const deleteMedicalRecord = async (recordId: string) => {
-  try {
-    await deleteDoc(doc(db, 'medicalRecords', recordId));
-  } catch (error) {
-    throw error;
-  }
+  await deleteDoc(doc(db, 'medicalRecords', recordId));
 };

@@ -40,8 +40,9 @@ const SignUpModal: React.FC<SignUpModalProps> = ({ isOpen, onClose, onSwitchToSi
     try {
       await signUp(email, password, name);
       onClose();
-    } catch (err: any) {
-      setError(err.message || 'Failed to create account');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to create account';
+      setError(message);
     } finally {
       setLoading(false);
     }
@@ -53,8 +54,9 @@ const SignUpModal: React.FC<SignUpModalProps> = ({ isOpen, onClose, onSwitchToSi
     try {
       await signInWithGoogle();
       onClose();
-    } catch (err: any) {
-      setError(err.message || 'Failed to sign in with Google');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to sign in with Google';
+      setError(message);
     } finally {
       setLoading(false);
     }

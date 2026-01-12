@@ -21,8 +21,12 @@ export const signUp = async (email: string, password: string, name: string) => {
       photoURL: userCredential.user.photoURL || '',
     });
     return userCredential.user;
-  } catch (error: any) {
-    throw new Error(getAuthErrorMessage(error.code));
+  } catch (error: unknown) {
+    const code =
+      typeof error === 'object' && error !== null && 'code' in error
+        ? String((error as { code: unknown }).code)
+        : 'unknown';
+    throw new Error(getAuthErrorMessage(code));
   }
 };
 
@@ -30,8 +34,12 @@ export const signIn = async (email: string, password: string) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     return userCredential.user;
-  } catch (error: any) {
-    throw new Error(getAuthErrorMessage(error.code));
+  } catch (error: unknown) {
+    const code =
+      typeof error === 'object' && error !== null && 'code' in error
+        ? String((error as { code: unknown }).code)
+        : 'unknown';
+    throw new Error(getAuthErrorMessage(code));
   }
 };
 
@@ -42,16 +50,24 @@ export const signInWithGoogle = async () => {
     const profile = formatUserProfile(result.user);
     await createUserProfile(profile);
     return result.user;
-  } catch (error: any) {
-    throw new Error(getAuthErrorMessage(error.code));
+  } catch (error: unknown) {
+    const code =
+      typeof error === 'object' && error !== null && 'code' in error
+        ? String((error as { code: unknown }).code)
+        : 'unknown';
+    throw new Error(getAuthErrorMessage(code));
   }
 };
 
 export const signOut = async () => {
   try {
     await firebaseSignOut(auth);
-  } catch (error: any) {
-    throw new Error(getAuthErrorMessage(error.code));
+  } catch (error: unknown) {
+    const code =
+      typeof error === 'object' && error !== null && 'code' in error
+        ? String((error as { code: unknown }).code)
+        : 'unknown';
+    throw new Error(getAuthErrorMessage(code));
   }
 };
 
@@ -62,7 +78,7 @@ const getAuthErrorMessage = (code: string): string => {
     case 'auth/invalid-email':
       return 'Invalid email address';
     case 'auth/operation-not-allowed':
-      return 'Operation not allowed';
+      return 'This sign-in method is disabled for this Firebase project. Enable it in Firebase Console → Authentication → Sign-in method.';
     case 'auth/weak-password':
       return 'Password is too weak';
     case 'auth/user-disabled':
@@ -71,6 +87,10 @@ const getAuthErrorMessage = (code: string): string => {
       return 'No account found with this email';
     case 'auth/wrong-password':
       return 'Incorrect password';
+    case 'auth/unauthorized-domain':
+      return 'This domain is not authorized for OAuth sign-in. Add it in Firebase Console → Authentication → Settings → Authorized domains.';
+    case 'auth/popup-blocked':
+      return 'Popup was blocked by the browser. Allow popups and try again.';
     case 'auth/popup-closed-by-user':
       return 'Sign in was cancelled';
     default:

@@ -1,32 +1,9 @@
-import { SpeechClient } from '@google-cloud/speech';
+export const transcribeAudio = async (_audio: ArrayBuffer | Blob, languageCode = 'en-US') => {
+  console.warn(
+    '[speechToText] Google Cloud Speech SDK cannot run in the browser. ' +
+      'Implement transcription via a backend endpoint (recommended) or use a browser speech recognition API.'
+  );
 
-const speechClient = new SpeechClient();
-
-export const transcribeAudio = async (audioBuffer: Buffer, languageCode = 'en-US') => {
-  try {
-    const audio = {
-      content: audioBuffer.toString('base64'),
-    };
-    
-    const config = {
-      encoding: 'LINEAR16',
-      sampleRateHertz: 16000,
-      languageCode: languageCode,
-      model: 'medical_conversation',
-      useEnhanced: true,
-    };
-
-    const request = {
-      audio: audio,
-      config: config,
-    };
-
-    const [response] = await speechClient.recognize(request);
-    return response.results
-      ?.map(result => result.alternatives?.[0]?.transcript)
-      .join('\n');
-  } catch (error) {
-    console.error('Error in speech-to-text:', error);
-    throw error;
-  }
+  void languageCode;
+  throw new Error('Speech-to-text is not available in the client build.');
 };

@@ -1,11 +1,17 @@
-import { hash, compare } from 'bcryptjs';
+const toHex = (buffer: ArrayBuffer): string =>
+  Array.from(new Uint8Array(buffer))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
 
 export const hashData = async (data: string): Promise<string> => {
-  return await hash(data, 10);
+  const encoded = new TextEncoder().encode(data);
+  const digest = await crypto.subtle.digest('SHA-256', encoded);
+  return toHex(digest);
 };
 
 export const compareHash = async (data: string, hash: string): Promise<boolean> => {
-  return await compare(data, hash);
+  const computed = await hashData(data);
+  return computed === hash;
 };
 
 export const sanitizeInput = (input: string): string => {

@@ -15,8 +15,8 @@ Imagine a world where healthcare resources are no longer bound by location, lang
 - **Responsive Design Meets Accessibility**  
   A visually stunning interface, powered by **Tailwind CSS** and **TypeScript**, with dynamic animations that engage and guide users intuitively.
 
-- **AI-Driven Optimization** *(Future Integration)*  
-  Leveraging machine learning for smarter resource allocation and predictive healthcare analytics.
+- **AI-Powered Diagnosis (Agentic)**  
+  Real-time, AI-driven initial health assessments using **Gemini 2.5 Flash** (via `gemini-1.5-flash`), featuring markdown-formatted results and empathetic, structured responses.
 
 - **Global Inclusivity**  
   From multi-language support to accessibility features like voice commands, we’re building for everyone, everywhere.
@@ -27,9 +27,67 @@ Imagine a world where healthcare resources are no longer bound by location, lang
 ---
 
 ## 🚀 Technology That Drives Us
-- **Frontend**: TypeScript, Tailwind CSS  
-- **Build Tool**: Vite  
-- **Version Control**: GitHub  
+- **Frontend**: TypeScript, Tailwind CSS, Vite
+- **AI Core**: Google Gemini API (@google/generative-ai)
+- **Version Control**: GitHub
+
+---
+
+## 🧰 Local Development (Quick)
+- Copy `.env.example` → `.env.local` and fill in your Firebase values.
+
+### Netlify Functions (Gemini)
+- Gemini runs server-side via a Netlify Function at `/api/gemini` (redirects to `/.netlify/functions/gemini`).
+- Set `GEMINI_API_KEY` in Netlify → Site settings → Environment variables.
+- Set `FIREBASE_SERVICE_ACCOUNT` (stringified JSON service account) in Netlify so the function can verify Firebase ID tokens.
+
+The frontend includes `Authorization: Bearer <Firebase ID token>` automatically after login.
+
+---
+
+## 🤟 ASL (MVP) – Real Animation Clips
+
+The `/consultation` page supports an MVP pipeline:
+
+Doctor text → Gemini **intent** → ASL **sign tokens** → **3D playback**
+
+### Drop-in sign assets
+
+- Put sign clips under `public/asl/signs/` using the token filename convention:
+  - `public/asl/signs/PAIN.glb`
+  - `public/asl/signs/MEDICINE.glb`
+  - etc.
+- The lexicon is defined in `src/asl/lexicon.ts`.
+- If **all** required `.glb` files exist for the generated sign sequence, the app will auto-switch to the real clip player; otherwise it falls back to the procedural avatar.
+
+### Current GLB expectation (MVP)
+
+For the easiest demo build: each sign `.glb` should contain:
+
+- A visible, rigged avatar model (skinned mesh)
+- One animation clip (the player will use the named clip from the lexicon if provided, otherwise the first clip)
+
+This avoids retargeting during the hackathon. Later, you can move to a single base avatar + separate animation clips (requires consistent skeleton + retarget/blending).
+
+### Recommended first 10 signs
+
+Start with these tokens (already in the grammar/lexicon):
+
+`PAIN`, `MEDICINE`, `EAT`, `AFTER`, `DOCTOR`, `FEVER`, `EMERGENCY`, `WHERE`, `YOU`, `TAKE`
+
+---
+
+## 📞 WebRTC Call (MVP)
+
+- Media (audio/video): WebRTC peer-to-peer (DTLS-SRTP)
+- Signaling: Firestore documents under `webrtcRooms/{roomId}` with ICE candidates in subcollections
+- ASL sync: WebRTC DataChannel messages (sign tokens) so both sides render the avatar locally
+
+Important: Firestore is only used for signaling metadata, not to relay media. For anything beyond a hackathon MVP, add strict Firestore security rules so only the two room participants can read/write the room + candidates.
+
+## 🔐 Security Notes
+- Do not commit `.env` / `.env.*` (they are gitignored).
+- Do not commit `dist/` (build output). If it was ever committed, remove it from git history and rotate leaked keys.
 
 ---
 
@@ -56,8 +114,8 @@ Together, we are committed to creating solutions that transcend boundaries and r
 ---
 
 ## 🌟 Future Plans
+- **Multi-Agent Systems**: Expanding our Agentic AI to handle complex tasks like appointment scheduling and medication reminders.
 - **Global Rollout**: Adapting the platform to meet international healthcare standards.
-- **AI Integration**: Implementing algorithms for predictive analytics and enhanced user experiences.
 - **Advanced Accessibility**: Features like gesture recognition and interactive animations to engage diverse audiences.
 
 ---

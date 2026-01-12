@@ -1,19 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { Brain, Activity, Apple, Dumbbell, BookOpen, Heart, Siren, FolderHeart } from 'lucide-react';
+import { navItems } from './navItems';
 
-export const navItems = [
-  { name: 'Mental Health', path: '/mental-health', icon: Brain },
-  { name: 'AI Diagnosis', path: '/ai-diagnosis', icon: Activity },
-  { name: 'Diet & Nutrition', path: '/diet-nutrition', icon: Apple },
-  { name: 'Fitness', path: '/fitness', icon: Dumbbell },
-  { name: 'Articles', path: '/articles', icon: BookOpen },
-  { name: 'Donation', path: '/donation', icon: Heart },
-  { name: 'SOS Support', path: '/sos', icon: Siren },
-  { name: 'Medical Portfolio', path: '/portfolio', icon: FolderHeart },
-];
-
-export const NavLinks: React.FC = () => {
+const NavLinks = () => {
   return (
     <>
       {navItems.map((item) => (
@@ -29,3 +17,5 @@ export const NavLinks: React.FC = () => {
     </>
   );
 };
+
+export default NavLinks;

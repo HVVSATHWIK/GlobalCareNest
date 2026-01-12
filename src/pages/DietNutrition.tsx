@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
-import { Apple, Search, Filter, ChevronDown } from 'lucide-react';
+import { useState } from 'react';
+import { Apple, Search, ChevronDown } from 'lucide-react';
 
-const RecipeCard = ({ title, calories, time, image, tags }) => (
+type RecipeCardProps = {
+  title: string;
+  calories: string;
+  time: string;
+  image: string;
+  tags: string[];
+};
+
+const RecipeCard = ({ title, calories, time, image, tags }: RecipeCardProps) => (
   <div className="bg-white rounded-lg shadow-md overflow-hidden">
     <img src={image} alt={title} className="w-full h-48 object-cover" />
     <div className="p-4">

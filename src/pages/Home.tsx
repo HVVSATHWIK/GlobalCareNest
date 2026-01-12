@@ -1,8 +1,22 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Brain, Activity, Apple, Dumbbell, Siren } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
-const ServiceCard = ({ icon: Icon, title, description, link }) => (
+type IconType = LucideIcon;
+
+type ServiceCardProps = {
+  icon: IconType;
+  title: string;
+  description: string;
+  link: string;
+};
+
+type TestimonialCardProps = {
+  quote: string;
+  author: string;
+};
+
+const ServiceCard = ({ icon: Icon, title, description, link }: ServiceCardProps) => (
   <Link
     to={link}
     className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center"
@@ -15,14 +29,15 @@ const ServiceCard = ({ icon: Icon, title, description, link }) => (
   </Link>
 );
 
-const TestimonialCard = ({ quote, author }) => (
+const TestimonialCard = ({ quote, author }: TestimonialCardProps) => (
   <div className="bg-white rounded-lg shadow p-6">
     <p className="text-gray-600 italic mb-4">"{quote}"</p>
     <p className="font-semibold text-[#219B9D]">- {author}</p>
   </div>
 );
 
-const Home = () => {
+const Home = ({ onAuth }: { onAuth?: (type: 'signin' | 'signup') => void }) => {
+  void onAuth;
   const services = [
     {
       icon: Brain,
@@ -74,7 +89,7 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section 
+      <section
         className="relative h-[600px] flex items-center justify-center text-white"
         style={{
           backgroundImage: 'linear-gradient(rgba(33, 155, 157, 0.8), rgba(33, 155, 157, 0.8)), url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80")',
