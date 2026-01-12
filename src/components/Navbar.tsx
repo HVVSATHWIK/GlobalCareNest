@@ -11,6 +11,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ onAuth }) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [logoAvailable, setLogoAvailable] = React.useState(true);
   const isDarkMode = useThemeStore((state) => state.isDarkMode);
   const logoSrc = `${import.meta.env.BASE_URL}logo.svg`;
 
@@ -36,11 +37,14 @@ const Navbar: React.FC<NavbarProps> = ({ onAuth }) => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center gap-3">
-              <img
-                src={logoSrc}
-                alt="Global CareNest Logo"
-                className="h-10 w-10 shrink-0 drop-shadow-md hover:scale-105 transition-transform duration-300"
-              />
+              {logoAvailable ? (
+                <img
+                  src={logoSrc}
+                  alt="Global CareNest Logo"
+                  className="h-10 w-10 shrink-0 drop-shadow-md hover:scale-105 transition-transform duration-300"
+                  onError={() => setLogoAvailable(false)}
+                />
+              ) : null}
               <span className="font-bold text-xl sm:text-2xl tracking-tight text-white drop-shadow-sm leading-tight">
                 Global CareNest
               </span>
