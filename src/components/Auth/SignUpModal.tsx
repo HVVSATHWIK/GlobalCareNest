@@ -107,7 +107,7 @@ const SignUpModal: React.FC<SignUpModalProps> = ({ isOpen, onClose, onSwitchToSi
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label htmlFor="signup-name" className="block text-sm font-medium text-gray-700 mb-1">
-                    Full Name <span className="text-red-500">*</span>
+                    Full Name <span className="text-red-500" aria-hidden="true">*</span><span className="sr-only"> (required)</span>
                   </label>
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -124,7 +124,7 @@ const SignUpModal: React.FC<SignUpModalProps> = ({ isOpen, onClose, onSwitchToSi
 
                 <div>
                   <label htmlFor="signup-email" className="block text-sm font-medium text-gray-700 mb-1">
-                    Email <span className="text-red-500">*</span>
+                    Email <span className="text-red-500" aria-hidden="true">*</span><span className="sr-only"> (required)</span>
                   </label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -141,7 +141,7 @@ const SignUpModal: React.FC<SignUpModalProps> = ({ isOpen, onClose, onSwitchToSi
 
                 <div>
                   <label htmlFor="signup-password" className="block text-sm font-medium text-gray-700 mb-1">
-                    Password <span className="text-red-500">*</span>
+                    Password <span className="text-red-500" aria-hidden="true">*</span><span className="sr-only"> (required)</span>
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" aria-hidden="true" />
