@@ -1,3 +1,7 @@
 ## 2024-04-11 - Form Accessibility Patterns
 **Learning:** In the Auth modals, inputs were lacking explicit association with labels, required fields didn't visually indicate necessity, and decorative icons needed aria-hidden to prevent screen reader noise. Icon-only buttons (like modal close buttons) need clear aria-labels.
 **Action:** Always link labels to inputs using htmlFor and id, append visually distinct required markers (like asterisks), and hide purely decorative SVG icons from assistive technology using aria-hidden='true'.
+
+## 2024-04-11 - Mobile Navigation Accessibility Pattern
+**Learning:** Mobile menu toggle buttons often lack necessary ARIA attributes for screen readers to understand their state and relationship. They need `aria-expanded` to indicate if the menu is open, `aria-controls` to link to the menu container's ID, and a clear `aria-label`. Icons inside should have `aria-hidden="true"`.
+**Action:** Always add `aria-expanded`, `aria-controls`, and an `aria-label` to toggle buttons, ensure the controlled container has a matching `id`, and add `aria-hidden="true"` to SVG icons. Also ensure `focus-visible` styles are present for keyboard users.
