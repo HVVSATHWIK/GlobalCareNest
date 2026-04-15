@@ -93,7 +93,9 @@ const Navbar: React.FC<NavbarProps> = ({ onAuth }) => {
             />
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md hover:bg-[#B9E5E8] hover:text-[#219B9D] transition-colors"
+              aria-expanded={isOpen}
+              aria-label={isOpen ? "Close main menu" : "Open main menu"}
+              className="inline-flex items-center justify-center p-2 rounded-md hover:bg-[#B9E5E8] hover:text-[#219B9D] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
