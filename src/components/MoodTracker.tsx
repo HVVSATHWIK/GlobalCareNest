@@ -61,7 +61,8 @@ const MoodTracker: React.FC = () => {
       </div>
 
       {selectedMood && selectedTime && (
-        <button className="w-full mt-6 px-4 py-2 bg-[#219B9D] text-white rounded-full hover:bg-opacity-90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2">
+        <button type="button" className="w-full mt-6 px-4 py-2 bg-[#219B9D] text-white rounded-full hover:bg-opacity-90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#219B9D] focus-visible:ring-offset-2">
+
           Save Entry
         </button>
       )}
