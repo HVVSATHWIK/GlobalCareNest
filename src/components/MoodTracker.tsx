@@ -28,6 +28,7 @@ const MoodTracker: React.FC = () => {
           {moods.map(({ icon: Icon, label, color }) => (
             <button
               key={label}
+              type="button"
               onClick={() => setSelectedMood(label)}
               aria-pressed={selectedMood === label}
               className={`flex flex-col items-center p-2 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${
@@ -47,6 +48,7 @@ const MoodTracker: React.FC = () => {
           {times.map(({ icon: Icon, label }) => (
             <button
               key={label}
+              type="button"
               onClick={() => setSelectedTime(label)}
               aria-pressed={selectedTime === label}
               className={`flex flex-col items-center p-2 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 ${
