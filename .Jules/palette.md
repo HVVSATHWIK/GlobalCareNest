@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2026-05-01 - Mobile Navigation Accessibility
+**Learning:** The mobile menu toggle button lacked context for screen readers and keyboard users. It didn't indicate whether it was opening or closing the menu, nor did it have a clear focus state when navigated via keyboard.
+**Action:** When implementing menu toggle buttons, always add dynamic `aria-label`s based on state (e.g., "Open menu" / "Close menu"), include `aria-expanded`, hide the inner decorative SVG icons with `aria-hidden="true"`, and provide clear keyboard focus styles (e.g., `focus-visible:ring-2`).
