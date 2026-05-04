@@ -4,3 +4,7 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+
+## 2026-05-04 - Form Accessibility Indicators
+**Learning:** In the AI Diagnosis form, required fields were visually marked but the asterisk wasn't hidden from screen readers. Labels were also missing explicit association with their inputs.
+**Action:** Use `htmlFor` and `id` pairs to associate labels with inputs, and add `aria-hidden="true"` to visual required indicators (like asterisks) to reduce screen reader noise while improving visual cues.
