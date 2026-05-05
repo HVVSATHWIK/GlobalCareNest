@@ -93,7 +93,10 @@ const Navbar: React.FC<NavbarProps> = ({ onAuth }) => {
             />
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md hover:bg-[#B9E5E8] hover:text-[#219B9D] transition-colors"
+              className="inline-flex items-center justify-center p-2 rounded-md hover:bg-[#B9E5E8] hover:text-[#219B9D] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+              aria-label="Toggle main menu"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -103,7 +106,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAuth }) => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden">
+        <div className="md:hidden" id="mobile-menu">
           <div className="px-3 pt-2 pb-4 space-y-1">
             {navItems.map((item) => (
               <NavLink
