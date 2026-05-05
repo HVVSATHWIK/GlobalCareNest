@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2025-05-05 - Mocking UI for Auth/API Blocked Components
+**Learning:** Firebase API key validation blocks full app rendering when using mock environment variables locally, making UI verification with Playwright difficult for some components.
+**Action:** Use a standalone mock HTML file with Tailwind classes to replicate the component structure and verify styling/accessibility changes when the main app is blocked by strict API or Auth validations.
