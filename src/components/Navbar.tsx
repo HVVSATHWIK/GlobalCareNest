@@ -94,6 +94,8 @@ const Navbar: React.FC<NavbarProps> = ({ onAuth }) => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md hover:bg-[#B9E5E8] hover:text-[#219B9D] transition-colors"
+              aria-label={isOpen ? 'Close mobile menu' : 'Open mobile menu'}
+              aria-expanded={isOpen}
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
