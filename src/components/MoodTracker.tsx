@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Smile, Meh, Frown, Sun, Cloud, CloudRain, Moon } from 'lucide-react';
+import { Smile, Meh, Frown, Sun, Cloud, CloudRain, Moon, Check } from 'lucide-react';
 
 const MoodTracker: React.FC = () => {
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [isSaved, setIsSaved] = useState(false);
 
   const moods = [
     { icon: Smile, label: 'Good', color: 'text-green-500' },
@@ -18,8 +19,17 @@ const MoodTracker: React.FC = () => {
     { icon: Moon, label: 'Night' },
   ];
 
+  const handleSave = () => {
+    setIsSaved(true);
+    setTimeout(() => {
+      setIsSaved(false);
+      setSelectedMood(null);
+      setSelectedTime(null);
+    }, 2000);
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
+    <div className="bg-white rounded-lg shadow-md p-6 transition-all">
       <h3 className="text-xl font-semibold mb-4 text-gray-800">Track Your Mood</h3>
       
       <div className="mb-6">
@@ -63,9 +73,20 @@ const MoodTracker: React.FC = () => {
       </div>
 
       {selectedMood && selectedTime && (
-        <button type="button" className="w-full mt-6 px-4 py-2 bg-[#219B9D] text-white rounded-full hover:bg-opacity-90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#219B9D] focus-visible:ring-offset-2">
-
-          Save Entry
+        <button
+          type="button"
+          onClick={handleSave}
+          disabled={isSaved}
+          className="w-full flex items-center justify-center mt-6 px-4 py-2 bg-[#219B9D] text-white rounded-full hover:bg-opacity-90 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#219B9D] focus-visible:ring-offset-2 disabled:bg-green-500 disabled:opacity-100 disabled:cursor-default"
+        >
+          {isSaved ? (
+            <>
+              <Check className="w-5 h-5 mr-2" aria-hidden="true" />
+              <span>Saved Successfully</span>
+            </>
+          ) : (
+            'Save Entry'
+          )}
         </button>
       )}
     </div>
