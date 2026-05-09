@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { X, Mail, Lock, AlertCircle } from 'lucide-react';
+import { X, Mail, Lock, AlertCircle, Loader2 } from 'lucide-react';
 import { signIn, signInWithGoogle } from '../../services/auth';
 import { validateEmail } from '../../utils/auth';
 
@@ -136,8 +136,9 @@ const SignInModal: React.FC<SignInModalProps> = ({ isOpen, onClose, onSwitchToSi
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[#219B9D] text-white py-2 rounded-md hover:bg-opacity-90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full flex items-center justify-center bg-[#219B9D] text-white py-2 rounded-md hover:bg-opacity-90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
+                  {loading && <Loader2 className="animate-spin h-5 w-5 mr-2" />}
                   {loading ? 'Signing in...' : 'Sign In'}
                 </button>
 
@@ -156,12 +157,16 @@ const SignInModal: React.FC<SignInModalProps> = ({ isOpen, onClose, onSwitchToSi
                   disabled={loading}
                   className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <img
-                    src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-                    alt="Google"
-                    className="w-5 h-5 mr-2"
-                  />
-                  Sign in with Google
+                  {loading ? (
+                    <Loader2 className="animate-spin h-5 w-5 mr-2" />
+                  ) : (
+                    <img
+                      src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                      alt="Google"
+                      className="w-5 h-5 mr-2"
+                    />
+                  )}
+                  {loading ? 'Signing in...' : 'Sign in with Google'}
                 </button>
               </form>
 
