@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2026-05-10 - Prevent layout shift on MoodTracker save button
+**Learning:** Using a permanently visible `disabled` button state instead of conditionally rendering it prevents layout shift and offers better discoverability for required form actions.
+**Action:** Replace conditionally rendered `{isValid && <button>}` blocks with `<button disabled={!isValid}>` across all forms to improve layout stability and provide actionable tooltips.
