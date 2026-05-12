@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2024-05-12 - Added Loading and Success States to MoodTracker
+**Learning:** Adding explicit "Saving" and "Saved" states to interactive components like the MoodTracker enhances UX by providing immediate feedback, removing ambiguity, and signaling when an action is fully complete.
+**Action:** Always include a visual loading state with disabled interactive buttons during asynchronous operations, and consider adding a transient success state afterward.
