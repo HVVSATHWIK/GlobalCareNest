@@ -4,3 +4,7 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+
+## 2024-05-16 - Accessible "Show Password" Toggle on Authentication Modals
+**Learning:** Adding a show/hide password toggle to password inputs is a critical UX and accessibility enhancement. Users often struggle typing long passwords on mobile or with screen readers. Utilizing an icon-only button inside the input wrapper requires careful consideration: using ARIA labels (e.g., "Show password") correctly updates the button state and providing `focus-visible` ensures keyboard navigators can tab and trigger the toggle effectively.
+**Action:** When creating password input fields, always include a toggle button using the `Eye`/`EyeOff` pattern, ensure it provides an accurate `aria-label` based on its active state, and use semantic `<button type="button">` to prevent accidental form submission while ensuring keyboard accessibility.
