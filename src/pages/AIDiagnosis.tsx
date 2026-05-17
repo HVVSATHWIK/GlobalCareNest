@@ -60,10 +60,11 @@ const AIDiagnosis = () => {
 
           <form onSubmit={handleSubmit} className="space-y-8">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Describe your symptoms in detail
+              <label htmlFor="symptoms" className="block text-sm font-semibold text-gray-700 mb-2">
+                Describe your symptoms in detail <span className="text-red-500" aria-hidden="true">*</span>
               </label>
               <textarea
+                id="symptoms"
                 value={symptoms}
                 onChange={(e) => setSymptoms(e.target.value)}
                 rows={4}
@@ -75,11 +76,14 @@ const AIDiagnosis = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Age
+                <label htmlFor="age" className="block text-sm font-semibold text-gray-700 mb-2">
+                  Age <span className="text-red-500" aria-hidden="true">*</span>
                 </label>
                 <input
+                  id="age"
                   type="number"
+                  min="0"
+                  max="120"
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
                   className="w-full border-gray-200 rounded-xl shadow-inner p-3 focus:ring-2 focus:ring-[#219B9D] focus:border-transparent transition-all bg-gray-50"
@@ -89,10 +93,11 @@ const AIDiagnosis = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Gender
+                <label htmlFor="gender" className="block text-sm font-semibold text-gray-700 mb-2">
+                  Gender <span className="text-red-500" aria-hidden="true">*</span>
                 </label>
                 <select
+                  id="gender"
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
                   className="w-full border-gray-200 rounded-xl shadow-inner p-3 focus:ring-2 focus:ring-[#219B9D] focus:border-transparent transition-all bg-gray-50"
@@ -109,7 +114,7 @@ const AIDiagnosis = () => {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full bg-[#219B9D] text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-[#1a7f81] hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex justify-center items-center gap-2 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+              className={`w-full bg-[#219B9D] text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-[#1a7f81] hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex justify-center items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#219B9D] ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
             >
               {loading ? (
                 <>
