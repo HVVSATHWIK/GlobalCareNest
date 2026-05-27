@@ -16,9 +16,10 @@ const ExerciseCard: React.FC<ExerciseCardProps> = ({ title, duration, descriptio
       <p className="text-gray-600 mb-4">{description}</p>
       <button
         onClick={onStart}
-        className="inline-flex items-center px-4 py-2 bg-[#219B9D] text-white rounded-full hover:bg-opacity-90 transition-colors"
+        className="inline-flex items-center px-4 py-2 bg-[#219B9D] text-white rounded-full hover:bg-opacity-90 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#219B9D] focus:outline-none"
+        aria-label={`Start ${title} exercise`}
       >
-        <Play className="h-4 w-4 mr-2" />
+        <Play className="h-4 w-4 mr-2" aria-hidden="true" />
         Start Exercise
       </button>
     </div>
