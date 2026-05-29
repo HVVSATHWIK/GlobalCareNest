@@ -209,7 +209,23 @@ const MedicalPortfolio = () => {
           </div>
 
           <div className="space-y-4">
-            {records.map((record) => (
+            {records.length === 0 ? (
+              <div className="text-center py-12 px-4 border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800/50">
+                <FolderHeart className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+                <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No medical records yet</h4>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 max-w-sm mx-auto">
+                  Keep track of your lab results, prescriptions, and health history in one secure place.
+                </p>
+                <button
+                  onClick={handleAddRecord}
+                  className="inline-flex items-center px-4 py-2 bg-[#219B9D] text-white rounded-md hover:bg-opacity-90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#219B9D]"
+                >
+                  <Plus className="h-4 w-4 mr-2" />
+                  Add Your First Record
+                </button>
+              </div>
+            ) : (
+            records.map((record) => (
               <div
                 key={record.id}
                 className="border border-gray-200 dark:border-gray-700 rounded-lg p-4"
@@ -267,7 +283,7 @@ const MedicalPortfolio = () => {
                   </div>
                 </div>
               </div>
-            ))}
+            )))}
           </div>
         </div>
       </div>
