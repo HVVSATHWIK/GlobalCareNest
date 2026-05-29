@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2026-05-29 - Added Empty State for Medical Records
+**Learning:** Empty states without explicit instructions or calls to action can leave users confused when lists start empty (like Medical Records).
+**Action:** Always verify what happens when data lists are empty and provide a clear, accessible CTA and helpful text if needed.
