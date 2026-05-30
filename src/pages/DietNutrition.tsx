@@ -165,20 +165,22 @@ const DietNutrition = () => {
             {/* Search and Filter */}
             <div className="flex flex-col md:flex-row gap-4 mb-8">
               <div className="relative flex-grow">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                <Search aria-hidden="true" className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                 <input
                   type="text"
                   placeholder="Search recipes..."
+                  aria-label="Search recipes"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-[#219B9D] focus:border-[#219B9D]"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#219B9D] focus:border-[#219B9D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#219B9D] focus-visible:border-[#219B9D]"
                 />
               </div>
               <div className="relative">
                 <select
+                  aria-label="Filter by diet"
                   value={selectedDiet}
                   onChange={(e) => setSelectedDiet(e.target.value)}
-                  className="appearance-none w-full bg-white px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:ring-[#219B9D] focus:border-[#219B9D]"
+                  className="appearance-none w-full bg-white px-4 py-2 pr-8 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#219B9D] focus:border-[#219B9D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#219B9D] focus-visible:border-[#219B9D]"
                 >
                   <option value="all">All Diets</option>
                   <option value="vegetarian">Vegetarian</option>
@@ -186,14 +188,25 @@ const DietNutrition = () => {
                   <option value="keto">Keto</option>
                   <option value="paleo">Paleo</option>
                 </select>
-                <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                <ChevronDown aria-hidden="true" className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               </div>
             </div>
 
             {/* Recipe Grid */}
             {filteredRecipes.length === 0 ? (
-              <div className="bg-white rounded-lg shadow-md p-6 text-gray-700">
-                No recipes match your search/filters.
+              <div className="bg-white rounded-lg shadow-md p-12 flex flex-col items-center justify-center text-center">
+                <div className="bg-[#B9E5E8] p-4 rounded-full mb-4">
+                  <Search className="h-8 w-8 text-[#219B9D]" aria-hidden="true" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">No recipes found</h3>
+                <p className="text-sm text-gray-600 mb-6 max-w-sm">We couldn't find any recipes matching your current search or diet filters.</p>
+                <button
+                  type="button"
+                  onClick={() => { setSearchQuery(''); setSelectedDiet('all'); }}
+                  className="px-6 py-2 bg-[#219B9D] text-white rounded-full hover:bg-opacity-90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#219B9D] focus-visible:ring-offset-2"
+                >
+                  Clear filters
+                </button>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
