@@ -4,3 +4,7 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+
+## 2026-05-31 - Explicit Label Association for Inputs
+**Learning:** Found instances where `<label>` elements were placed before inputs/textareas but lacked explicit `htmlFor` and `id` attributes. This prevents screen readers from announcing the label when the input is focused and prevents users from clicking the label to focus the input.
+**Action:** Always link `<label>` to `<input>`, `<textarea>`, or `<select>` using `htmlFor` on the label and matching `id` on the form control.
