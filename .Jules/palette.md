@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2026-06-03 - Focus Ring Color
+**Learning:** When adding focus rings, it's better practice to use existing semantic design tokens (e.g., `ring-teal-500`) rather than hardcoding arbitrary hex values (e.g., `ring-[#219B9D]`) to strictly adhere to design constraints and maintain consistency.
+**Action:** Always check existing components for standard token usage before introducing raw hex values for focus rings.
