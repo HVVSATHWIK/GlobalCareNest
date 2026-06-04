@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2024-06-04 - Enable Delete Action for Medical Records Iteration
+**Learning:** Medical Records mapping iteration didn't allow users to remove input records. Once created, they stayed there forever causing a poor experience if the user inputted incorrectly or is testing.
+**Action:** Implemented a remove button next to mapping elements with the proper Aria Label.
