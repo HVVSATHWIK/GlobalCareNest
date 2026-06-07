@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2024-06-07 - Providing Visual Feedback on Save Actions
+**Learning:** Adding visual feedback (like a changing icon and text, e.g., "Saving..." to "Saved!") to buttons during async operations significantly improves user confidence and prevents duplicate submissions.
+**Action:** Always implement intermediate ("Saving...") and success ("Saved!") states on form submission buttons, disabling them during the process and shortly after to provide clear, accessible feedback.
