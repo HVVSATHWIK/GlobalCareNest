@@ -1,9 +1,27 @@
 import React, { useState } from 'react';
-import { Smile, Meh, Frown, Sun, Cloud, CloudRain, Moon } from 'lucide-react';
+import { Smile, Meh, Frown, Sun, Cloud, CloudRain, Moon, Check, Loader2 } from 'lucide-react';
 
 const MoodTracker: React.FC = () => {
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+
+  const handleSave = () => {
+    setIsSaving(true);
+    // Simulate async save operation
+    setTimeout(() => {
+      setIsSaving(false);
+      setIsSaved(true);
+
+      // Reset form after a delay to show success state
+      setTimeout(() => {
+        setIsSaved(false);
+        setSelectedMood(null);
+        setSelectedTime(null);
+      }, 2000);
+    }, 1000);
+  };
 
   const moods = [
     { icon: Smile, label: 'Good', color: 'text-green-500' },
@@ -63,9 +81,27 @@ const MoodTracker: React.FC = () => {
       </div>
 
       {selectedMood && selectedTime && (
-        <button type="button" className="w-full mt-6 px-4 py-2 bg-[#219B9D] text-white rounded-full hover:bg-opacity-90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#219B9D] focus-visible:ring-offset-2">
-
-          Save Entry
+        <button
+          type="button"
+          onClick={handleSave}
+          disabled={isSaving || isSaved}
+          className={`w-full mt-6 px-4 py-2 text-white rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#219B9D] focus-visible:ring-offset-2 flex items-center justify-center ${
+            isSaved ? 'bg-green-500 hover:bg-green-600' : 'bg-[#219B9D] hover:bg-opacity-90'
+          } disabled:opacity-70 disabled:cursor-not-allowed`}
+        >
+          {isSaving ? (
+            <>
+              <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+              Saving...
+            </>
+          ) : isSaved ? (
+            <>
+              <Check className="h-5 w-5 mr-2" />
+              Saved!
+            </>
+          ) : (
+            'Save Entry'
+          )}
         </button>
       )}
     </div>
