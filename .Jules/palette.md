@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2026-06-08 - Added Async Feedback to Mood Tracker Save
+**Learning:** For actions like saving a mood log which don't navigate away, lacking immediate visual feedback leaves users unsure if their click worked, leading to potential duplicate submissions or abandonment. Using a simulated delay for UI feedback on frontend-only environments is a robust way to demonstrate this interaction pattern.
+**Action:** Always provide minimum 3 states for async actions: Default, Loading (disabled + spinner), and Success (disabled + checkmark) before resetting to Default.
