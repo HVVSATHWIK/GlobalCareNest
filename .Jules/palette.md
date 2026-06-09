@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2026-06-09 - Accessible Custom File Uploads
+**Learning:** Using `className="hidden"` on a file input completely removes it from the keyboard tab order and accessibility tree, making custom styled upload buttons inaccessible to keyboard and screen reader users.
+**Action:** Use Tailwind's `sr-only` to keep the input accessible, provide an `aria-label`, and add `focus-within` utility classes to the visible wrapper (like the `<label>`) to show a focus ring when the invisible input receives focus.
