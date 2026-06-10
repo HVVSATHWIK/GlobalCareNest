@@ -84,7 +84,7 @@ const SignInModal: React.FC<SignInModalProps> = ({ isOpen, onClose, onSwitchToSi
                 <Dialog.Title className="text-xl font-semibold">Sign In</Dialog.Title>
                 <button 
                   onClick={onClose}
-                  className="text-gray-500 hover:text-gray-700 transition-colors"
+                  className="text-gray-500 hover:text-gray-700 transition-colors rounded-full p-1 -m-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#219B9D]"
                   aria-label="Close sign in modal"
                 >
                   <X className="h-5 w-5" aria-hidden="true" />
