@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
-import { Smile, Meh, Frown, Sun, Cloud, CloudRain, Moon } from 'lucide-react';
+import { Smile, Meh, Frown, Sun, Cloud, CloudRain, Moon, Check } from 'lucide-react';
 
 const MoodTracker: React.FC = () => {
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [isSaved, setIsSaved] = useState(false);
+
+  const handleSave = () => {
+    setIsSaved(true);
+    setTimeout(() => {
+      setIsSaved(false);
+      setSelectedMood(null);
+      setSelectedTime(null);
+    }, 2000);
+  };
 
   const moods = [
     { icon: Smile, label: 'Good', color: 'text-green-500' },
@@ -63,9 +73,24 @@ const MoodTracker: React.FC = () => {
       </div>
 
       {selectedMood && selectedTime && (
-        <button type="button" className="w-full mt-6 px-4 py-2 bg-[#219B9D] text-white rounded-full hover:bg-opacity-90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#219B9D] focus-visible:ring-offset-2">
-
-          Save Entry
+        <button
+          type="button"
+          onClick={handleSave}
+          disabled={isSaved}
+          className={`w-full mt-6 px-4 py-2 text-white rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 flex items-center justify-center ${
+            isSaved
+              ? 'bg-green-500 focus-visible:ring-green-500 cursor-not-allowed'
+              : 'bg-[#219B9D] hover:bg-opacity-90 focus-visible:ring-[#219B9D]'
+          }`}
+        >
+          {isSaved ? (
+            <>
+              <Check className="h-5 w-5 mr-2" aria-hidden="true" />
+              Saved!
+            </>
+          ) : (
+            'Save Entry'
+          )}
         </button>
       )}
     </div>
