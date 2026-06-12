@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2024-05-18 - Async Action Feedback Pattern
+**Learning:** Components handling async actions (like the MoodTracker save) lacked visual feedback during processing or success states, which can lead to user confusion or double submissions.
+**Action:** Always provide interaction feedback (e.g., disabled states, loading spinners, success icons) on async operations. Ensure these visual state changes are announced to screen readers by wrapping the dynamic content region in `aria-live="polite"`. Use props to allow the parent to handle the async logic properly rather than mocking internal state.
