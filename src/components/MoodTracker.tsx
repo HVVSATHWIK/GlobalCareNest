@@ -1,9 +1,40 @@
 import React, { useState } from 'react';
-import { Smile, Meh, Frown, Sun, Cloud, CloudRain, Moon } from 'lucide-react';
+import { Smile, Meh, Frown, Sun, Cloud, CloudRain, Moon, CheckCircle, Loader2 } from 'lucide-react';
 
-const MoodTracker: React.FC = () => {
+interface MoodTrackerProps {
+  onSave?: (mood: string, time: string) => Promise<void>;
+}
+
+const MoodTracker: React.FC<MoodTrackerProps> = ({ onSave }) => {
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+
+  const handleSave = async () => {
+    if (!selectedMood || !selectedTime) return;
+
+    setIsSaving(true);
+    try {
+      if (onSave) {
+        await onSave(selectedMood, selectedTime);
+      } else {
+        // Fallback simulate async save if no handler provided (for MVP demo)
+        await new Promise(resolve => setTimeout(resolve, 800));
+      }
+      setIsSaved(true);
+      // Reset form after a delay
+      setTimeout(() => {
+        setIsSaved(false);
+        setSelectedMood(null);
+        setSelectedTime(null);
+      }, 2000);
+    } catch (error) {
+      console.error("Failed to save mood:", error);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   const moods = [
     { icon: Smile, label: 'Good', color: 'text-green-500' },
@@ -63,9 +94,30 @@ const MoodTracker: React.FC = () => {
       </div>
 
       {selectedMood && selectedTime && (
-        <button type="button" className="w-full mt-6 px-4 py-2 bg-[#219B9D] text-white rounded-full hover:bg-opacity-90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#219B9D] focus-visible:ring-offset-2">
-
-          Save Entry
+        <button
+          type="button"
+          onClick={handleSave}
+          disabled={isSaving || isSaved}
+          aria-live="polite"
+          className={`w-full mt-6 px-4 py-2 text-white rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#219B9D] focus-visible:ring-offset-2 flex items-center justify-center gap-2 ${
+            isSaved
+              ? 'bg-green-500'
+              : 'bg-[#219B9D] hover:bg-opacity-90 disabled:bg-opacity-70 disabled:cursor-not-allowed'
+          }`}
+        >
+          {isSaving ? (
+            <>
+              <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />
+              <span>Saving...</span>
+            </>
+          ) : isSaved ? (
+            <>
+              <CheckCircle className="h-5 w-5" aria-hidden="true" />
+              <span>Saved successfully!</span>
+            </>
+          ) : (
+            <span>Save Entry</span>
+          )}
         </button>
       )}
     </div>
