@@ -74,15 +74,18 @@ const MedicalPortfolio = () => {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <Upload className="h-8 w-8 text-gray-400" />
+                    <Upload className="h-8 w-8 text-gray-400" aria-hidden="true" />
                   </div>
                 )}
               </div>
-              <label className="absolute bottom-0 right-0 bg-[#219B9D] text-white p-2 rounded-full cursor-pointer">
-                <Upload className="h-4 w-4" />
+              <label
+                className="absolute bottom-0 right-0 bg-[#219B9D] text-white p-2 rounded-full cursor-pointer focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-[#219B9D]"
+                aria-label="Upload profile photo"
+              >
+                <Upload className="h-4 w-4" aria-hidden="true" />
                 <input
                   type="file"
-                  className="hidden"
+                  className="sr-only"
                   accept="image/*"
                   onChange={handleImageUpload}
                 />

@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2024-06-14 - File Upload Keyboard Accessibility
+**Learning:** Using \`className="hidden"\` (\`display: none\`) on \`<input type="file">\` elements completely removes them from the accessibility tree and keyboard tab order, breaking keyboard navigation for file uploads.
+**Action:** Always use \`sr-only\` (screen-reader only) for file inputs to keep them focusable, and apply \`focus-within\` styles to their visible parent container (like a \`<label>\`) to ensure keyboard users see a visible focus ring when tabbing to the input.
