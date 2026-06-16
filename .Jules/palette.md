@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2026-06-16 - Link Context for Screen Readers
+**Learning:** Ambiguous link text like 'Learn More' is difficult for screen reader users to understand when navigating out of context. Adding descriptive `aria-label` helps provide context.
+**Action:** Use `aria-label` on links with generic text (like 'Read More' or 'Learn More') to describe the destination, and hide decorative trailing icons using `aria-hidden='true'`.
