@@ -78,11 +78,11 @@ const MedicalPortfolio = () => {
                   </div>
                 )}
               </div>
-              <label className="absolute bottom-0 right-0 bg-[#219B9D] text-white p-2 rounded-full cursor-pointer">
-                <Upload className="h-4 w-4" />
+              <label className="absolute bottom-0 right-0 bg-[#219B9D] text-white p-2 rounded-full cursor-pointer transition-colors focus-within:ring-2 focus-within:ring-[#219B9D] focus-within:ring-offset-2">
+                <Upload aria-hidden="true" className="h-4 w-4" />
                 <input
                   type="file"
-                  className="hidden"
+                  className="sr-only"
                   accept="image/*"
                   onChange={handleImageUpload}
                 />
@@ -189,8 +189,8 @@ const MedicalPortfolio = () => {
             </div>
           </div>
 
-          <button className="mt-6 inline-flex items-center px-4 py-2 bg-[#219B9D] text-white rounded-md hover:bg-opacity-90">
-            <Save className="h-4 w-4 mr-2" />
+          <button className="mt-6 inline-flex items-center px-4 py-2 bg-[#219B9D] text-white rounded-md hover:bg-opacity-90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#219B9D] focus-visible:ring-offset-2">
+            <Save aria-hidden="true" className="h-4 w-4 mr-2" />
             Save Changes
           </button>
         </div>
@@ -201,9 +201,9 @@ const MedicalPortfolio = () => {
             <h3 className="text-xl font-semibold dark:text-white">Medical Records</h3>
             <button
               onClick={handleAddRecord}
-              className="inline-flex items-center px-4 py-2 bg-[#219B9D] text-white rounded-md hover:bg-opacity-90"
+              className="inline-flex items-center px-4 py-2 bg-[#219B9D] text-white rounded-md hover:bg-opacity-90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#219B9D] focus-visible:ring-offset-2"
             >
-              <Plus className="h-4 w-4 mr-2" />
+              <Plus aria-hidden="true" className="h-4 w-4 mr-2" />
               Add Record
             </button>
           </div>
