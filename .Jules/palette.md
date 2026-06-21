@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2026-06-21 - Theme Switch Accessibility
+**Learning:** For state-toggling icon buttons (like theme switches), using a static 'Toggle theme' aria-label is less informative than describing the action that will happen when clicked.
+**Action:** Use dynamic `aria-label` and `title` that describes the resulting action based on current state (e.g., 'Switch to dark theme'), ensure keyboard focus is visible, and hide decorative icons.
