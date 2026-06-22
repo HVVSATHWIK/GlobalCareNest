@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2024-06-22 - Custom File Upload Button Accessibility
+**Learning:** For custom file upload buttons, avoiding `display: none` (e.g., Tailwind's `hidden`) on the `<input type="file">` is crucial because it removes the element from the keyboard tab order and breaks accessibility.
+**Action:** Use `sr-only` to keep the input visually hidden but accessible, and add `focus-within` styling to the visible wrapping parent (like a `<label>`) to provide a focus ring for keyboard users.

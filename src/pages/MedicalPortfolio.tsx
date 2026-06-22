@@ -78,13 +78,17 @@ const MedicalPortfolio = () => {
                   </div>
                 )}
               </div>
-              <label className="absolute bottom-0 right-0 bg-[#219B9D] text-white p-2 rounded-full cursor-pointer">
+              <label
+                className="absolute bottom-0 right-0 bg-[#219B9D] text-white p-2 rounded-full cursor-pointer hover:bg-opacity-90 transition-colors focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-[#219B9D]"
+                title="Upload profile image"
+              >
                 <Upload className="h-4 w-4" />
                 <input
                   type="file"
-                  className="hidden"
+                  className="sr-only"
                   accept="image/*"
                   onChange={handleImageUpload}
+                  aria-label="Upload profile image"
                 />
               </label>
             </div>
