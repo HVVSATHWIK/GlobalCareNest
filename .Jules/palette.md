@@ -4,3 +4,7 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+
+## 2024-06-27 - Dynamic Attributes for Toggle Buttons
+**Learning:** Icon-only toggle buttons (like Theme Switches) often use a static aria-label (e.g., "Toggle Theme"), which doesn't inform screen reader users of the *result* of their action. A static title attribute also fails to provide helpful tooltips.
+**Action:** When creating state-toggling icon buttons, use a dynamic `aria-label` and `title` attribute that explicitly describes the resulting action based on the current state (e.g., 'Switch to dark mode' / 'Switch to light mode'). This improves both accessibility and usability (via tooltips) for mouse users.
