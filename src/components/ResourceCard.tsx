@@ -23,9 +23,10 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ title, description, imageUr
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center text-[#219B9D] hover:text-[#B9E5E8] transition-colors"
+          aria-label={`Learn more about ${title} (opens in a new tab)`}
+          className="inline-flex items-center text-[#219B9D] hover:text-[#B9E5E8] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#219B9D] focus-visible:ring-offset-2 rounded-sm"
         >
-          Learn More <ExternalLink className="ml-1 h-4 w-4" />
+          Learn More <ExternalLink aria-hidden="true" className="ml-1 h-4 w-4" />
         </a>
       </div>
     </div>
