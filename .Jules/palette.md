@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2024-03-24 - ThemeToggle dynamic ARIA label and focus ring
+**Learning:** For state-toggling icon buttons like a theme switch, static `aria-label`s like "Toggle theme" aren't fully descriptive because they do not describe the action that *will* happen. Changing it dynamically based on state (e.g. "Switch to dark theme") combined with a tooltip (`title`) provides a better, more informative UX. Additionally, `focus-visible` ring on icon buttons is critical for keyboard accessibility as without it, keyboard users cannot determine when the element has focus. Setting `aria-hidden="true"` on the icons themselves prevents redundant screen reader announcements.
+**Action:** Always verify that interactive icon-only elements have dynamic ARIA labels (if they toggle state), a tooltip, and an explicitly visible `focus-visible` CSS class in Tailwind, like `focus-visible:ring-2 focus-visible:ring-offset-2`.
