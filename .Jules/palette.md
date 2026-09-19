@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2024-05-18 - State-toggling Buttons Accessibility
+**Learning:** For state-toggling buttons like ThemeToggle, a static `aria-label="Toggle theme"` lacks context about the resulting action. It is also important to use `aria-hidden="true"` on the inner SVGs to avoid redundant screen reader noise.
+**Action:** Use a dynamic `aria-label` (and `title` for tooltip) that describes the *future state/action* (e.g., 'Switch to dark theme') and apply `aria-hidden="true"` to decorative inner SVGs.
