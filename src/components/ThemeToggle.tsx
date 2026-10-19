@@ -8,13 +8,14 @@ const ThemeToggle: React.FC = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
-      aria-label="Toggle theme"
+      className="p-2 rounded-full transition-colors hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900"
+      aria-label="Dark Mode"
+      aria-pressed={isDarkMode}
     >
       {isDarkMode ? (
-        <Sun className="h-5 w-5" />
+        <Sun aria-hidden="true" className="h-5 w-5" />
       ) : (
-        <Moon className="h-5 w-5" />
+        <Moon aria-hidden="true" className="h-5 w-5" />
       )}
     </button>
   );
