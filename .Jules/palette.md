@@ -4,3 +4,6 @@
 ## 2024-04-24 - Interactive Component Grouping
 **Learning:** Groups of interactive buttons (like mood or time selectors) lack clear association for screen readers without proper grouping.
 **Action:** Use `role="group"` and `aria-labelledby` on parent containers to associate a descriptive question/label with a set of related buttons. Add `aria-pressed` to indicate active selection.
+## 2024-05-15 - File Input Accessibility
+**Learning:** Using `display: none` (Tailwind's `hidden`) on a `<input type="file">` removes it from the accessibility tree and keyboard tab order.
+**Action:** Always use `sr-only` on file inputs instead of `hidden`, add an `aria-label` and `focus-within` styling to its wrapping `<label>` element to provide a focus ring and semantic meaning for screen readers.
